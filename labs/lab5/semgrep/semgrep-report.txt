@@ -1,0 +1,87 @@
+Semgrep OSS SAST report for OWASP Juice Shop v19.0.0
+Source: labs/lab5/semgrep/juice-shop-19.0.0
+Semgrep version: 1.162.0
+Scanned files: 1014
+Findings: 26
+ERROR: 8
+WARNING: 18
+
+This human-readable report is synchronized with labs/lab5/semgrep/semgrep-results.json.
+
+[ERROR] javascript.sequelize.security.audit.sequelize-injection-express routes/search.ts:23
+  Sequelize raw query receives user-controlled search input; use parameterized queries or replacements.
+
+[ERROR] javascript.sequelize.security.audit.sequelize-injection-express routes/login.ts:34
+  Login query receives user-controlled email/password input; this can enable SQL injection and authentication bypass.
+
+[ERROR] javascript.lang.security.audit.code-string-concat routes/userProfile.ts:62
+  Express request data flows to eval(); this can lead to arbitrary code execution.
+
+[ERROR] yaml.github-actions.security.run-shell-injection .github/workflows/update-challenges-ebook.yml:21
+  GitHub context interpolation is used directly in a run step, allowing shell injection from untrusted workflow data.
+
+[ERROR] javascript.sequelize.security.audit.sequelize-injection-express data/static/codefixes/dbSchemaChallenge_1.ts:5
+  Challenge codefix snippet contains a Sequelize raw query tainted by user input.
+
+[ERROR] javascript.sequelize.security.audit.sequelize-injection-express data/static/codefixes/dbSchemaChallenge_3.ts:11
+  Challenge codefix snippet contains a Sequelize raw query tainted by user input.
+
+[ERROR] javascript.sequelize.security.audit.sequelize-injection-express data/static/codefixes/unionSqlInjectionChallenge_1.ts:6
+  Challenge codefix snippet contains a Sequelize raw query tainted by user input.
+
+[ERROR] javascript.sequelize.security.audit.sequelize-injection-express data/static/codefixes/unionSqlInjectionChallenge_3.ts:10
+  Challenge codefix snippet contains a Sequelize raw query tainted by user input.
+
+[WARNING] javascript.jsonwebtoken.security.jwt-hardcode.hardcoded-jwt-secret lib/insecurity.ts:56
+  JWT signing secret is hardcoded in source; move signing material to managed secrets and rotate exposed keys.
+
+[WARNING] javascript.express.security.injection.raw-html-format routes/chatbot.ts:197
+  User-controlled data is formatted into raw HTML, creating XSS risk.
+
+[WARNING] javascript.express.security.audit.express-res-sendfile routes/fileServer.ts:33
+  User-controlled path data reaches res.sendFile(); validate and canonicalize paths.
+
+[WARNING] javascript.express.security.audit.express-res-sendfile routes/keyServer.ts:14
+  User-controlled path data reaches res.sendFile(); validate and canonicalize paths.
+
+[WARNING] javascript.express.security.audit.express-res-sendfile routes/logfileServer.ts:14
+  User-controlled path data reaches res.sendFile(); validate and canonicalize paths.
+
+[WARNING] javascript.express.security.audit.express-res-sendfile routes/quarantineServer.ts:14
+  User-controlled path data reaches res.sendFile(); validate and canonicalize paths.
+
+[WARNING] javascript.express.security.audit.possible-user-input-redirect routes/redirect.ts:19
+  User-controlled URL participates in redirect handling; enforce strict allowlisting.
+
+[WARNING] javascript.express.security.audit.express-open-redirect routes/redirect.ts:19
+  Redirect logic may allow open redirects if the destination is not strictly validated.
+
+[WARNING] javascript.lang.security.audit.unknown-value-with-script-tag routes/videoHandler.ts:58
+  Untrusted value is embedded into a script tag; sanitize or encode before rendering.
+
+[WARNING] javascript.lang.security.audit.unknown-value-with-script-tag routes/videoHandler.ts:71
+  Untrusted value is embedded into a script tag; sanitize or encode before rendering.
+
+[WARNING] javascript.express.security.audit.express-check-directory-listing server.ts:269
+  Static file serving can expose directory contents; disable directory listing.
+
+[WARNING] javascript.express.security.audit.express-check-directory-listing server.ts:273
+  Static file serving can expose directory contents; disable directory listing.
+
+[WARNING] javascript.express.security.audit.express-check-directory-listing server.ts:277
+  Static file serving can expose directory contents; disable directory listing.
+
+[WARNING] javascript.express.security.audit.express-check-directory-listing server.ts:281
+  Static file serving can expose directory contents; disable directory listing.
+
+[WARNING] generic.html-templates.security.unquoted-attribute-var frontend/src/app/navbar/navbar.component.html:17
+  Template attribute variable is unquoted; quote template values to reduce XSS risk.
+
+[WARNING] generic.html-templates.security.unquoted-attribute-var frontend/src/app/purchase-basket/purchase-basket.component.html:15
+  Template attribute variable is unquoted; quote template values to reduce XSS risk.
+
+[WARNING] generic.html-templates.security.unquoted-attribute-var frontend/src/app/search-result/search-result.component.html:40
+  Template attribute variable is unquoted; quote template values to reduce XSS risk.
+
+[WARNING] generic.html-templates.security.unquoted-attribute-var views/dataErasureForm.hbs:21
+  Template attribute variable is unquoted; quote template values to reduce XSS risk.

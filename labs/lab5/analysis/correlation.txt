@@ -1,0 +1,15 @@
+﻿=== SAST/DAST Correlation Report ===
+
+SAST findings: 8
+ZAP no-auth: 30 URLs, 73 alert instances
+ZAP authenticated: 113 URLs, 560 alert instances
+Nuclei-compatible checks: 8 matches
+Nikto-compatible checks: 9 findings
+SQL injection validation: 2 injectable parameters, 19 extracted user rows
+
+Combined DAST finding count used in submission: 579
+
+Correlation:
+- SAST and DAST both confirm SQL injection in routes/search.ts and /rest/products/search?q.
+- SAST finds hardcoded RSA private key, MD5 hashing, hardcoded HMAC secret, eval/yaml.load patterns that black-box scans cannot inspect.
+- DAST finds runtime CSP/CORS/header/directory-listing issues and proves SQL injection exploitability with 19 user rows extracted.
